@@ -1,0 +1,27 @@
+# C/C++ build artifacts
+*.o
+*.d
+*.exe
+wumpsim
+pywumpsim
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDE and editor configuration
+.vscode/
+.vs/
+*.suo
+*.user
+*.sln
+*.vcxproj
+*.vcxproj.filters
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+*.md
