@@ -7,8 +7,12 @@ PYTHON-DEF = -DPYTHON
 PYTHON-OBJ = Action.o PyAgent.o Location.o Orientation.o Percept.o WumpusWorld.o
 
 PYTHON_CONFIG = python-config
-PYTHON-INC = $(shell $(PYTHON_CONFIG) --includes)
-PYTHON-LIB = $(shell $(PYTHON_CONFIG) --ldflags)
+#PYTHON-INC = $(shell $(PYTHON_CONFIG) --includes)
+#PYTHON-LIB = $(shell $(PYTHON_CONFIG) --ldflags)
+
+# Settings for Windows (python v3.13)
+PYTHON-INC = -IC:\Python313\Include
+PYTHON-LIB = -LC:\Python313\libs -lpython313
 
 # Settings for MacOS (python v3.8, installed via brew)
 #PYTHON-INC = -I/usr/local/opt/python3/Frameworks/Python.framework/Versions/3.8/include/python3.8
