@@ -10,9 +10,9 @@ PYTHON_CONFIG = python-config
 #PYTHON-INC = $(shell $(PYTHON_CONFIG) --includes)
 #PYTHON-LIB = $(shell $(PYTHON_CONFIG) --ldflags)
 
-# Settings for Windows (python v3.13)
-PYTHON-INC = -IC:\Python313\Include
-PYTHON-LIB = -LC:\Python313\libs -lpython313
+# Settings for Linux venv
+PYTHON-INC = -I/home/codespace/.python/current/include/python3.12
+PYTHON-LIB = -L/usr/local/python/3.12.1/lib -lpython3.12
 
 # Settings for MacOS (python v3.8, installed via brew)
 #PYTHON-INC = -I/usr/local/opt/python3/Frameworks/Python.framework/Versions/3.8/include/python3.8
