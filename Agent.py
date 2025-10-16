@@ -11,6 +11,7 @@ class Agent:
     def __init__(self):
         """Constructor, called only once for a new agent."""
         self.action: int = -1
+        self.last_action: int = -1
         self.location: list[int] = [1, 1]
         self.has_arrow: bool = True
         self.has_gold: bool = False
@@ -27,6 +28,7 @@ class Agent:
         Use this to reset any agent state.
         """
         self.action: int = -1
+        self.last_action: int = -1
         self.location: list[int] = [1, 1]
         self.has_arrow: bool = True
         self.has_gold: bool = False
@@ -42,23 +44,39 @@ class Agent:
             self.orientation %= 4
             return TURNRIGHT
 
-    def Move(self) -> int:
+    def Move(self, bump: bool = False) -> int:
         """
         Moves based on current orientation
         """
-        if self.orientation == LEFT:
-            # Increase x by 1
-            self.location[0] -= 1
-        elif self.orientation == RIGHT:
-            # Decrease x by 1
-            self.location[0] += 1
-        elif self.orientation == UP:
-            # Increase y by 1
-            self.location[1] += 1
-        elif self.orientation == DOWN:
-            # Decrease y by 1
-            self.location[1] -= 1
-        return GOFORWARD
+        # If we bump, undo the move operation.
+        if bump:
+            if self.orientation == LEFT:
+                # Undo Increase x by 1
+                self.location[0] += 1
+            elif self.orientation == RIGHT:
+                # Undo Decrease x by 1
+                self.location[0] -= 1
+            elif self.orientation == UP:
+                # Undo Increase y by 1
+                self.location[1] -= 1
+            elif self.orientation == DOWN:
+                # Undo Decrease y by 1
+                self.location[1] += 1
+            return -1
+        else:
+            if self.orientation == LEFT:
+                    # Increase x by 1
+                    self.location[0] -= 1
+                elif self.orientation == RIGHT:
+                    # Decrease x by 1
+                    self.location[0] += 1
+                elif self.orientation == UP:
+                    # Increase y by 1
+                    self.location[1] += 1
+                elif self.orientation == DOWN:
+                    # Decrease y by 1
+                    self.location[1] -= 1
+                    return GOFORWARD
 
     def Process(self, percept: Percept) -> int:
         """
@@ -67,6 +85,11 @@ class Agent:
         Must return a valid action as int.
         """
         self.action = -1
+        # If we bump, undo the movement and try again.
+        if percept.bump:
+            # Undo movement
+            self.Move(bump=True)
+        
         if percept.glitter:
             action = GRAB
             self.has_gold = True
@@ -89,7 +112,7 @@ class Agent:
             choice = random.randint(0, 2)
             match choice:
                 case 0:
-                    action = self.Move()
+                    action = self.Move(bump=False)
                 case 1:
                     action = self.Turn(TURNLEFT)
                 case 2:
@@ -97,4 +120,5 @@ class Agent:
                 case _:
                     print(
                         "Error in none case.")
+        self.last_action = self.action
         return action
