@@ -35,9 +35,11 @@ class Agent:
     def Turn(self, direction: int):
         if direction == TURNLEFT:
             self.orientation += 1
+            self.orientation %= 4
             return TURNLEFT
         if direction == TURNRIGHT:
             self.orientation -= 1
+            self.orientation %= 4
             return TURNRIGHT
 
     def Move(self) -> int:
@@ -46,10 +48,10 @@ class Agent:
         """
         if self.orientation == LEFT:
             # Increase x by 1
-            self.location[0] += 1
+            self.location[0] -= 1
         elif self.orientation == RIGHT:
             # Decrease x by 1
-            self.location[0] -= 1
+            self.location[0] += 1
         elif self.orientation == UP:
             # Increase y by 1
             self.location[1] += 1
