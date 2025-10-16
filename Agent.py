@@ -67,35 +67,34 @@ class Agent:
         Must return a valid action as int.
         """
         self.action = -1
-        while True:
-            if percept.glitter:
-                action = GRAB
-                self.has_gold = True
-            # If the agent is in the (1,1) location and has the gold, then CLIMB.
-            elif self.location == [1, 1] and self.has_gold:
-                action = CLIMB
-            # If the agent has an arrow, and the agent is in the top row (Y=4),
-            # and the agent’s orientation=RIGHT, then SHOOT.
-            elif self.has_arrow and self.orientation == RIGHT and self.location[1] == 4:
-                action = SHOOT
-                self.has_arrow = False
-            # If the agent has an arrow, and the agent is in the rightmost column (X=4),
-            # and the agent’s orientation=UP, then SHOOT.
-            elif self.has_arrow and self.orientation == UP and self.location[0] == 4:
-                action = SHOOT
-                self.has_arrow = False
-            # If none of the above conditions are met, then the agent should randomly choose one
-            # of the actions: GOFORWARD, TURNLEFT, TURNRIGHT
-            else:
-                choice = random.randint(0, 2)
-                match choice:
-                    case 0:
-                        action = self.Move()
-                    case 1:
-                        action = self.Turn(TURNLEFT)
-                    case 2:
-                        action = self.Turn(TURNRIGHT)
-                    case _:
-                        print(
-                            "Error in none case.")
-            return action
+        if percept.glitter:
+            action = GRAB
+            self.has_gold = True
+        # If the agent is in the (1,1) location and has the gold, then CLIMB.
+        elif self.location == [1, 1] and self.has_gold:
+            action = CLIMB
+        # If the agent has an arrow, and the agent is in the top row (Y=4),
+        # and the agent’s orientation=RIGHT, then SHOOT.
+        elif self.has_arrow and self.orientation == RIGHT and self.location[1] == 4:
+            action = SHOOT
+            self.has_arrow = False
+        # If the agent has an arrow, and the agent is in the rightmost column (X=4),
+        # and the agent’s orientation=UP, then SHOOT.
+        elif self.has_arrow and self.orientation == UP and self.location[0] == 4:
+            action = SHOOT
+            self.has_arrow = False
+        # If none of the above conditions are met, then the agent should randomly choose one
+        # of the actions: GOFORWARD, TURNLEFT, TURNRIGHT
+        else:
+            choice = random.randint(0, 2)
+            match choice:
+                case 0:
+                    action = self.Move()
+                case 1:
+                    action = self.Turn(TURNLEFT)
+                case 2:
+                    action = self.Turn(TURNRIGHT)
+                case _:
+                    print(
+                        "Error in none case.")
+        return action
