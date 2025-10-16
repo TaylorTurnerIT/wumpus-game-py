@@ -65,18 +65,18 @@ class Agent:
             return -1
         else:
             if self.orientation == LEFT:
-                    # Increase x by 1
-                    self.location[0] -= 1
-                elif self.orientation == RIGHT:
-                    # Decrease x by 1
-                    self.location[0] += 1
-                elif self.orientation == UP:
-                    # Increase y by 1
-                    self.location[1] += 1
-                elif self.orientation == DOWN:
-                    # Decrease y by 1
-                    self.location[1] -= 1
-                    return GOFORWARD
+                # Increase x by 1
+                self.location[0] -= 1
+            elif self.orientation == RIGHT:
+                # Decrease x by 1
+                self.location[0] += 1
+            elif self.orientation == UP:
+                # Increase y by 1
+                self.location[1] += 1
+            elif self.orientation == DOWN:
+                # Decrease y by 1
+                self.location[1] -= 1
+                return GOFORWARD
 
     def Process(self, percept: Percept) -> int:
         """
@@ -89,7 +89,7 @@ class Agent:
         if percept.bump:
             # Undo movement
             self.Move(bump=True)
-        
+
         if percept.glitter:
             action = GRAB
             self.has_gold = True
