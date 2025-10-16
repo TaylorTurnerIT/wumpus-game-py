@@ -74,12 +74,12 @@ class Agent:
                 action = CLIMB
             # If the agent has an arrow, and the agent is in the top row (Y=4),
             # and the agent’s orientation=RIGHT, then SHOOT.
-            elif self.has_arrow and self.orientation is RIGHT and self.location[1] == 4:
+            elif self.has_arrow and self.orientation == RIGHT and self.location[1] == 4:
                 action = SHOOT
                 self.has_arrow = False
             # If the agent has an arrow, and the agent is in the rightmost column (X=4),
             # and the agent’s orientation=UP, then SHOOT.
-            elif self.has_arrow and self.orientation is UP and self.location[0] == 4:
+            elif self.has_arrow and self.orientation == UP and self.location[0] == 4:
                 action = SHOOT
                 self.has_arrow = False
             # If none of the above conditions are met, then the agent should randomly choose one
