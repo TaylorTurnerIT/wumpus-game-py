@@ -76,7 +76,7 @@ class Agent:
             elif self.orientation == DOWN:
                 # Decrease y by 1
                 self.location[1] -= 1
-                return GOFORWARD
+            return GOFORWARD
 
     def Process(self, percept: Percept) -> int:
         """
